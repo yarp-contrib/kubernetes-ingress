@@ -19,7 +19,7 @@ using var serilog = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(serilog, dispose: false);
 
-builder.Configuration.AddJsonFile("/app/config/yarp.json", optional: true);
+builder.Configuration.AddEnvironmentVariables();
 builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
 builder.Services.AddKubernetesReverseProxy(builder.Configuration);
 
