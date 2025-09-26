@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     
     <ContainerVersion>0.1.0</ContainerVersion>
-    <ContainerRepository>yarp-contrib/k8s-ingress-monitor</ContainerRepository>
+    <ContainerRepository>yarp-contrib/kubernetes-ingress/monitor</ContainerRepository>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-alpine</ContainerBaseImage>
     <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
     <ContainerImageFormat>OCI</ContainerImageFormat>
