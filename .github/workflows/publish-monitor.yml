@@ -1,4 +1,4 @@
-name: publish
+name: Publish Controller
 
 on:
   workflow_dispatch:
@@ -28,6 +28,6 @@ jobs:
             --configuration Release \
             --os linux \
             -p ContainerRegistry=ghcr.io
-        working-directory: ./src/YarpContrib.Kubernetes.IngressController
+        working-directory: ./src/YarpContrib.Kubernetes.Ingress.Monitor
         env:
           ContainerImageTags: "${{ github.sha }};latest"
