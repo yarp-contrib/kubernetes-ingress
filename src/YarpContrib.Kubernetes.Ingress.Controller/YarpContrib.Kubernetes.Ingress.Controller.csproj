@@ -9,6 +9,7 @@
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-alpine</ContainerBaseImage>
     <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
     <ContainerImageFormat>OCI</ContainerImageFormat>
+    <ContainerDescription>YARP-based Kubernetes Ingress Controller</ContainerDescription>
   </PropertyGroup>
 
   <ItemGroup>
