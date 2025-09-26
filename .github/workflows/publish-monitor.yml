@@ -1,4 +1,4 @@
-name: Publish Controller
+name: Publish Monitor
 
 on:
   workflow_dispatch:
