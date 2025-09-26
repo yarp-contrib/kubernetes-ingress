@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "YarpContrib.Kubernetes.IngressMonitor": {
+    "YarpContrib.Kubernetes.Ingress.Monitor": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

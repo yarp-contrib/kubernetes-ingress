@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/YarpContrib.Kubernetes.Ingress.Controller/YarpContrib.Kubernetes.Ingress.Controller.csproj" />
+    <Project Path="src/YarpContrib.Kubernetes.Ingress.Monitor/YarpContrib.Kubernetes.Ingress.Monitor.csproj" />
+  </Folder>
+</Solution>
