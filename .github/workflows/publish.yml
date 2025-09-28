@@ -1,4 +1,4 @@
-name: Publish Monitor
+name: Publish
 
 on:
   workflow_dispatch:
@@ -21,6 +21,16 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: |
+          dotnet publish \
+            /t:PublishContainer \
+            --configuration Release \
+            --os linux \
+            -p ContainerRegistry=ghcr.io
+        working-directory: ./src/YarpContrib.Kubernetes.Ingress.Controller
+        env:
+          ContainerImageTags: "${{ github.sha }};latest"
 
       - run: |
           dotnet publish \
