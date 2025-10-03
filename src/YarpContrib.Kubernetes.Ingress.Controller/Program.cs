@@ -1,6 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
+using Yarp.Kubernetes.Protocol;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,10 +20,36 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(serilog, dispose: false);
 
 builder.Configuration.AddEnvironmentVariables();
-builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
-builder.Services.AddKubernetesReverseProxy(builder.Configuration);
+builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
+{
+    { "--controller-class", "Yarp.ControllerClass" },
+    { "-c", "Yarp.ControllerClass" },
+    { "--controller-service-name", "Yarp.ControllerServiceName" },
+    { "-s", "Yarp.ControllerServiceName" },
+    { "--controller-service-namespace", "Yarp.ControllerServiceNamespace" },
+    { "-n", "Yarp.ControllerServiceNamespace" },
+    { "--monitor-url", "Yarp.ControllerUrl" },
+    { "-m", "Yarp.ControllerUrl" }
+});
 
+var isStandalone = string.IsNullOrEmpty(builder.Configuration["Yarp.ControllerUrl"]);
+
+builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
 builder.Services.AddHealthChecks();
+
+if (isStandalone)
+{
+    builder.Services
+        .AddKubernetesReverseProxy(builder.Configuration);
+}
+else
+{
+    builder.Services
+        .Configure<ReceiverOptions>(builder.Configuration.Bind)
+        .AddHostedService<Receiver>()
+        .AddReverseProxy()
+        .LoadFromMessages();
+}
 
 var app = builder.Build();
 
