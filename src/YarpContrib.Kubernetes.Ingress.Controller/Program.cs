@@ -34,7 +34,7 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
 
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["Yarp.ControllerUrl"]);
 
-// builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
+builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
 
 if (isStandalone)
 {
