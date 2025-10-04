@@ -17,10 +17,7 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
-    <PackageReference Include="KubernetesClient" Version="17.0.14" />  
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="KubernetesClient" Version="17.0.14" />
     <PackageReference Include="Yarp.Kubernetes.Controller" Version="3.0.0-preview.1.25472.1" />
   </ItemGroup>
 
