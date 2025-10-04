@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +35,6 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["Yarp.ControllerUrl"]);
 
 builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
-builder.Services.AddHealthChecks();
 
 if (isStandalone)
 {
@@ -53,15 +52,8 @@ else
 
 var app = builder.Build();
 
-app.MapHealthChecks("/health/live", new HealthCheckOptions
-{
-    Predicate = _ => false
-});
-
-app.MapHealthChecks("/health/ready", new HealthCheckOptions
-{
-    Predicate = _ => true
-});
+app.Map("/health/live", async c => await c.Response.WriteAsync("Alive"));
+app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
 
 app.MapReverseProxy();
 

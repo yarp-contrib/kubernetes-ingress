@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,14 +36,7 @@ builder.Services
 
 var app = builder.Build();
 
-app.MapHealthChecks("/health/live", new HealthCheckOptions
-{
-    Predicate = _ => false
-});
-
-app.MapHealthChecks("/health/ready", new HealthCheckOptions
-{
-    Predicate = _ => true
-});
+app.Map("/health/live", async c => await c.Response.WriteAsync("Alive"));
+app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
 
 app.Run();
