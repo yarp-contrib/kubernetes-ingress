@@ -29,8 +29,8 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
     { "-s", "Yarp.ControllerServiceName" },
     { "--controller-service-namespace", "Yarp.ControllerServiceNamespace" },
     { "-n", "Yarp.ControllerServiceNamespace" },
-    { "--monitor-url", "Yarp.ControllerUrl" },
-    { "-m", "Yarp.ControllerUrl" }
+    { "--monitor-url", "ControllerUrl" },
+    { "-m", "ControllerUrl" }
 });
 
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["Yarp.ControllerUrl"]);
