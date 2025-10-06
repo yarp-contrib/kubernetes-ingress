@@ -55,7 +55,9 @@ var app = builder.Build();
 
 app.Map("/health/live", async c => {
     var options = c.RequestServices.GetRequiredService<IOptions<ReceiverOptions>>();
-    await c.Response.WriteAsync("CONTRooooOOOOOOOOOOOOOOOOOOLLLLLLLER " + options.Value.ControllerUrl);
+    var logger = c.RequestServices.GetRequiredService<ILogger<Program>>();
+    logger.LogInformation("Liveness check, controller url: {ControllerUrl}", options.Value.ControllerUrl);
+    await c.Response.WriteAsync("Alive");
 });
 app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
 
