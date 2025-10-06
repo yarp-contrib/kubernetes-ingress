@@ -33,7 +33,7 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
     { "-m", "ControllerUrl" }
 });
 
-var isStandalone = string.IsNullOrEmpty(builder.Configuration["Yarp.ControllerUrl"]);
+var isStandalone = string.IsNullOrEmpty(builder.Configuration["ControllerUrl"]);
 
 builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
 
