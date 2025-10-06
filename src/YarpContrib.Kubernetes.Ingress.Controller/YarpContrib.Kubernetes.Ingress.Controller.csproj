@@ -14,6 +14,11 @@
     <ContainerAppCommandInstruction>DefaultArgs</ContainerAppCommandInstruction>
   </PropertyGroup>
 
+  <ItemGroup Label="Container CMD assignment">
+    <ContainerAppCommand Include="dotnet" />
+    <ContainerDefaultArgs Include="/app/YarpContrib.Kubernetes.Ingress.Controller.dll" />
+</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
