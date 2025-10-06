@@ -11,6 +11,7 @@
     <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
     <ContainerImageFormat>OCI</ContainerImageFormat>
     <ContainerDescription>YARP-based Kubernetes Ingress Controller</ContainerDescription>
+    <ContainerAppCommandInstruction>DefaultArgs</ContainerAppCommandInstruction>
   </PropertyGroup>
 
   <ItemGroup>
