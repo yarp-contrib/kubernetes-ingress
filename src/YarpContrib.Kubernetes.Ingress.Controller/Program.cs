@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using Yarp.Kubernetes.Protocol;
@@ -52,7 +53,10 @@ else
 
 var app = builder.Build();
 
-app.Map("/health/live", async c => await c.Response.WriteAsync("Alive"));
+app.Map("/health/live", async c => {
+    var options = c.RequestServices.GetRequiredService<IOptions<ReceiverOptions>>();
+    await c.Response.WriteAsync("CONTRooooOOOOOOOOOOOOOOOOOOLLLLLLLER " + options.Value.ControllerUrl);
+});
 app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
 
 app.MapReverseProxy();
