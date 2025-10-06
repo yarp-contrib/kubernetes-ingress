@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using Yarp.Kubernetes.Protocol;
@@ -54,9 +53,10 @@ else
 var app = builder.Build();
 
 app.Map("/health/live", async c => {
-    var options = c.RequestServices.GetRequiredService<IOptions<ReceiverOptions>>();
+    var options = new ReceiverOptions();
+    builder.Configuration.Bind(options)
     var logger = c.RequestServices.GetRequiredService<ILogger<Program>>();
-    logger.LogInformation("Liveness check, controller url: {ControllerUrl}", options.Value.ControllerUrl);
+    logger.LogInformation("Liveness check, controller url: {IsStandalone} {ControllerUrl}", isStandalone, options.ControllerUrl);
     await c.Response.WriteAsync("Alive");
 });
 app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
