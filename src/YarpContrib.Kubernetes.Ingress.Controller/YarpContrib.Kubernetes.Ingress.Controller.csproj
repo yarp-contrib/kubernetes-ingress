@@ -16,8 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="Container CMD assignment">
-    <ContainerAppCommand Include="dotnet" />
-    <ContainerAppCommand Include="/app/YarpContrib.Kubernetes.Ingress.Controller.dll" />
+    <ContainerEntrypoint Include="dotnet" />
+    <ContainerEntrypoint Include="/app/YarpContrib.Kubernetes.Ingress.Controller.dll" />
+    <ContainerAppCommand Include="[]" />
   </ItemGroup>
 
   <ItemGroup>
