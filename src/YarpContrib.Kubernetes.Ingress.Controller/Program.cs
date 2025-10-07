@@ -46,8 +46,6 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
 
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["ControllerUrl"]);
 
-builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
-
 if (isStandalone)
 {
     builder.Services
@@ -55,6 +53,8 @@ if (isStandalone)
 }
 else
 {
+    builder.WebHost.UseKubernetesReverseProxyCertificateSelector();
+    
     builder.Services
         .Configure<ReceiverOptions>(builder.Configuration.Bind)
         .AddHostedService<Receiver>()
