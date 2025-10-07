@@ -23,12 +23,12 @@ builder.Logging.AddSerilog(serilog, dispose: false);
 builder.Configuration.AddEnvironmentVariables();
 builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
 {
-    { "--controller-class", "Yarp.ControllerClass" },
-    { "-c", "Yarp.ControllerClass" },
-    { "--controller-service-name", "Yarp.ControllerServiceName" },
-    { "-s", "Yarp.ControllerServiceName" },
-    { "--controller-service-namespace", "Yarp.ControllerServiceNamespace" },
-    { "-n", "Yarp.ControllerServiceNamespace" },
+    { "--controller-class", "Yarp:ControllerClass" },
+    { "-c", "Yarp:ControllerClass" },
+    { "--controller-service-name", "Yarp:ControllerServiceName" },
+    { "-s", "Yarp:ControllerServiceName" },
+    { "--controller-service-namespace", "Yarp:ControllerServiceNamespace" },
+    { "-n", "Yarp:ControllerServiceNamespace" },
     { "--monitor-url", "ControllerUrl" },
     { "-m", "ControllerUrl" }
 });
