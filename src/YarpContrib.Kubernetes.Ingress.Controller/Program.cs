@@ -50,12 +50,8 @@ else
 
 var app = builder.Build();
 
-app.UseRouting().UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    endpoints.MapHealthChecks("/health/live");
-    endpoints.MapHealthChecks("/health/ready");
-});
+app.MapHealthChecks("/health/live");
+app.MapHealthChecks("/health/ready");
 
 app.MapReverseProxy();
 
