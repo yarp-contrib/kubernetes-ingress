@@ -54,7 +54,7 @@ var app = builder.Build();
 
 app.Map("/health/live", async c => {
     var options = new ReceiverOptions();
-    builder.Configuration.Bind(options)
+    builder.Configuration.Bind(options);
     var logger = c.RequestServices.GetRequiredService<ILogger<Program>>();
     logger.LogInformation("Liveness check, controller url: {IsStandalone} {ControllerUrl}", isStandalone, options.ControllerUrl);
     await c.Response.WriteAsync("Alive");

@@ -11,14 +11,7 @@
     <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
     <ContainerImageFormat>OCI</ContainerImageFormat>
     <ContainerDescription>YARP-based Kubernetes Ingress Controller</ContainerDescription>
-    <ContainerAppCommandInstruction>DefaultArgs</ContainerAppCommandInstruction>
-    <ContainerWorkingDirectory>/app</ContainerWorkingDirectory>
   </PropertyGroup>
-
-  <ItemGroup Label="Container CMD assignment">
-    <ContainerEntrypoint Include="dotnet" />
-    <ContainerEntrypoint Include="/app/YarpContrib.Kubernetes.Ingress.Controller.dll" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
