@@ -37,7 +37,11 @@ builder.Services
 
 var app = builder.Build();
 
-app.Map("/health/live", async c => await c.Response.WriteAsync("Alive"));
-app.Map("/health/ready", async c => await c.Response.WriteAsync("Ready"));
+app.UseRouting().UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapHealthChecks("/health/live");
+    endpoints.MapHealthChecks("/health/ready");
+});
 
 app.Run();
