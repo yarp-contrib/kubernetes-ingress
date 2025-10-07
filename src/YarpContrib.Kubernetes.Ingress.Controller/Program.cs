@@ -42,6 +42,8 @@ if (isStandalone)
 else
 {
     builder.Services
+        .AddHealthChecks()
+        .Services
         .Configure<ReceiverOptions>(builder.Configuration.Bind)
         .AddHostedService<Receiver>()
         .AddReverseProxy()
