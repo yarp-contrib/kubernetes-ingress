@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,12 @@ builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
     { "--monitor-url", "ControllerUrl" },
     { "-m", "ControllerUrl" }
 });
+
+    var options = new ReceiverOptions();
+    builder.Configuration.Bind(options);
+
+    Console.WriteLine("Starting args " + string.Join(' ', args));
+    Console.WriteLine("Starting config " + options.ControllerUrl + " " + builder.Configuration["ControllerUrl"]);
 
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["ControllerUrl"]);
 
