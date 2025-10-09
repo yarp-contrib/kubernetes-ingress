@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -56,8 +56,8 @@ else
 
 var app = builder.Build();
 
-app.MapHealthChecks("/health/live", new HealthCheckOptions { Predicate = _ => false }).RequireHost("*:10255");
-app.MapHealthChecks("/health/ready", new HealthCheckOptions { Predicate = _ => false}).RequireHost("*:10255");
+app.MapGet("/health/live", () => Results.Ok()).RequireHost("*:10255");
+app.MapGet("/health/ready", () => Results.Ok()).RequireHost("*:10255");
 
 app.MapReverseProxy();
 
