@@ -55,8 +55,8 @@ else
 
 var app = builder.Build();
 
-app.MapHealthChecks("/health/live");
-app.MapHealthChecks("/health/ready");
+app.MapHealthChecks("/health/live").RequireHost("*:10255");
+app.MapHealthChecks("/health/ready").RequireHost("*:10255");
 
 app.MapReverseProxy();
 
