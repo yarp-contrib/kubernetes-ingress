@@ -39,8 +39,8 @@ var app = builder.Build();
 app.UseRouting().UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    endpoints.MapHealthChecks("/health/live").RequireHost("*:10255");
-    endpoints.MapHealthChecks("/health/ready").RequireHost("*:10255");
+    endpoints.MapHealthChecks("/health/live").RequireHost("*:10264");
+    endpoints.MapHealthChecks("/health/ready").RequireHost("*:10264");
 });
 
 app.Run();
