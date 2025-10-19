@@ -44,6 +44,6 @@ To install the controller on your cluster, there's available this [yarp-ingress]
 
 ## Considerations
 
-- Internally, this controller uses [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller) and so it supports all its [optional Ingress annotations](https://github.com/dotnet/yarp/blob/main/samples/KubernetesIngress.Sample/README.md#annotations).
+- This controller uses [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller) internally and so it supports all its [optional Ingress annotations](https://github.com/dotnet/yarp/blob/main/samples/KubernetesIngress.Sample/README.md#annotations).
 - Both applications (controller and monitor) make available `/health/live` and `/health/ready` endpoints on port *10264*. Currently they only return a 200/OK response, with no further internal logic.
 - SSL/TLS termination is currently not supported.
