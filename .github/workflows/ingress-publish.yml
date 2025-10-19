@@ -1,4 +1,4 @@
-name: (Apps) Publish
+name: (Ingress) Publish Images
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: (Apps) Build
+name: (Ingress) Build
 
 on:
   pull_request:
