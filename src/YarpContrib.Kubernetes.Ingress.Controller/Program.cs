@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,24 +18,33 @@ using var serilog = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(serilog, dispose: false);
 
-builder.Configuration.AddEnvironmentVariables();
-builder.Configuration.AddCommandLine(args, new Dictionary<string, string>
-{
-    { "--controller-class", "Yarp:ControllerClass" },
-    { "-c", "Yarp:ControllerClass" },
-    { "--controller-service-name", "Yarp:ControllerServiceName" },
-    { "-s", "Yarp:ControllerServiceName" },
-    { "--controller-service-namespace", "Yarp:ControllerServiceNamespace" },
-    { "-n", "Yarp:ControllerServiceNamespace" },
+builder.Configuration
+    .AddInMemoryCollection(new Dictionary<string, string>
+    {
+        { "Yarp:ControllerClass", "microsoft.com/ingress-yarp" },
+        { "Yarp:ControllerServiceName", "yarp-ingress" },
+        { "Yarp:ControllerServiceNamespace", "yarp" },
+    }!)
+    .AddEnvironmentVariables()
+    .AddCommandLine(args, new Dictionary<string, string>
+    {
+        { "--controller-class", "Yarp:ControllerClass" },
+        { "-c", "Yarp:ControllerClass" },
+        { "--controller-service-name", "Yarp:ControllerServiceName" },
+        { "-s", "Yarp:ControllerServiceName" },
+        { "--controller-service-namespace", "Yarp:ControllerServiceNamespace" },
+        { "-n", "Yarp:ControllerServiceNamespace" },
 
-    { "--monitor-url", "ControllerUrl" },
-    { "-m", "ControllerUrl" },
+        { "--monitor-url", "ControllerUrl" },
+        { "-m", "ControllerUrl" },
 
-    { "--server-certificate-enabled", "Yarp:ServerCertificates" },
-    { "--default-ssl-certificate-secret-name", "Yarp:DefaultSslCertificate" }
-});
+        { "--server-certificate-enabled", "Yarp:ServerCertificates" },
+        { "--default-ssl-certificate-secret-name", "Yarp:DefaultSslCertificate" }
+    });
 
 var isStandalone = string.IsNullOrEmpty(builder.Configuration["ControllerUrl"]);
+
+builder.Services.AddHealthChecks();
 
 if (isStandalone)
 {
@@ -46,8 +54,6 @@ if (isStandalone)
 else
 {
     builder.Services
-        .AddHealthChecks()
-        .Services
         .Configure<ReceiverOptions>(builder.Configuration.Bind)
         .AddHostedService<Receiver>()
         .AddReverseProxy()
