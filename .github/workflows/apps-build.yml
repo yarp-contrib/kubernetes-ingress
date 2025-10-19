@@ -1,4 +1,4 @@
-name: Build
+name: (Apps) Build
 
 on:
   pull_request:

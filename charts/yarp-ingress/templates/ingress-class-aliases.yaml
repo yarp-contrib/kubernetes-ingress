@@ -1,0 +1,17 @@
+{{- range .Values.ingressClass.aliases }}
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  labels:
+    {{- include "ingress-nginx.labels" $ | nindent 4 }}
+  name: {{ . }}
+  {{- if $.Values.ingressClass.annotations }}
+  annotations: {{ toYaml $.Values.ingressClass.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  controller: {{ $.Values.ingressClass.controllerValue }}
+  {{- with $.Values.ingressClass.parameters }}
+  parameters: {{ toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}

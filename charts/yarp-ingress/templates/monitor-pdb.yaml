@@ -1,0 +1,27 @@
+{{- $replicas := .Values.monitor.replicaCount }}
+{{- if .Values.monitor.autoscaling.enabled }}
+{{- $replicas = .Values.monitor.autoscaling.minReplicas }}
+{{- end }}
+{{- if gt ($replicas | int) 1 }}
+apiVersion: {{ ternary "policy/v1" "policy/v1beta1" (semverCompare ">=1.21.0-0" .Capabilities.KubeVersion.Version) }}
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
+  name: {{ include "yarp-ingress.fullname" . }}-monitor
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "yarp-ingress.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: monitor
+  {{- if and .Values.monitor.pdb.minAvailable (not (hasKey .Values.monitor "maxUnavailable")) }}
+  minAvailable: {{ .Values.monitor.pdb.minAvailable }}
+  {{- else if .Values.monitor.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.monitor.pdb.maxUnavailable }}
+  {{- end }}
+  {{- if .Values.monitor.pdb.unhealthyPodEvictionPolicy }}
+  unhealthyPodEvictionPolicy: {{ .Values.monitor.pdb.unhealthyPodEvictionPolicy }}
+  {{- end }}
+{{- end }}

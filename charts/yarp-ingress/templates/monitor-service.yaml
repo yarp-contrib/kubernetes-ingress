@@ -1,0 +1,24 @@
+{{- if .Values.monitor.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  {{- range $key, $value := .Values.monitor.service.annotations }}
+    {{ $key }}: {{ tpl ($value | toString) $ | quote }}
+  {{- end }}
+  labels:
+    {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
+  name: {{ include "yarp-ingress.fullname" . }}-monitor
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: api
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    {{- include "yarp-ingress.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
+{{- end }}

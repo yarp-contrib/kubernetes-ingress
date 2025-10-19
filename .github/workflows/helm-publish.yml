@@ -1,0 +1,54 @@
+name: "(Helm) Publish repository charts"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+    - "charts/**"
+
+jobs:
+  push-chart:
+    permissions:
+      contents: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - uses: azure/setup-helm@v4
+        with:
+          version: latest
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1
+        with:
+          pages_branch: helm-index
+          mark_as_latest: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CR_GENERATE_RELEASE_NOTES: true
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push chart to ghcr.io
+        run: |
+          shopt -s nullglob
+          for pkg in .cr-release-packages/*.tgz; do
+            if [ -z "${pkg:-}" ]; then
+              break
+            fi
+            helm push "${pkg}" oci://ghcr.io/${{ github.repository }}
+          done

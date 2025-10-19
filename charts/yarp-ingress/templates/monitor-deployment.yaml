@@ -1,0 +1,82 @@
+{{- if .Values.monitor.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "yarp-ingress.fullname" . }}-monitor
+  labels:
+    {{- include "yarp-ingress.labels" . | nindent 4 }}
+    app.kubernetes.io/component: monitor
+spec:
+  {{- if not .Values.monitor.autoscaling.enabled }}
+  replicas: {{ .Values.monitor.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "yarp-ingress.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: monitor
+  template:
+    metadata:
+      {{- with .Values.monitor.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "yarp-ingress.labels" . | nindent 8 }}
+        app.kubernetes.io/component: monitor
+        {{- with .Values.monitor.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.monitor.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "yarp-ingress.monitor.serviceAccountName" . }}
+      {{- with .Values.monitor.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.monitor.containerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.monitor.image.repository }}:{{ .Values.monitor.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.monitor.image.pullPolicy }}
+          ports:
+          {{- range $key, $value := .Values.monitor.containerPorts }}
+            - name: {{ $key }}
+              containerPort: {{ $value }}
+              protocol: TCP
+          {{- end }}
+          args: {{ include "yarp-ingress.monitor.args" . | nindent 12 }}
+          env:
+          {{- if .Values.monitor.extraEnvVars }}
+            {{- toYaml .Values.monitor.extraEnvVars | nindent 12 }}
+          {{- end }}
+          {{- with .Values.monitor.livenessProbe }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.monitor.readinessProbe }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.monitor.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.monitor.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.monitor.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.monitor.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
