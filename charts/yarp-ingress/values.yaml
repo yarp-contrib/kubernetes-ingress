@@ -184,7 +184,7 @@ ingressClass:
   default: false
   annotations: {}
   parameters: {}
-  # -- List of additional IngressClass resources to be created as aliases to the main IngressClass defined above.
+  # -- List of additional IngressClass resources to be created as named aliases to the main IngressClass controller defined above
   aliases: []
 
 rbac:
