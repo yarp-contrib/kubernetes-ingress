@@ -179,8 +179,11 @@ controller:
       udp: {}
 
 ingressClass:
+  # -- Name of the IngressClass resource to be created for the controller
   name: "yarp"
+  # -- Controller value of the IngressClass resource to be created for the controller
   controllerValue: "microsoft.com/ingress-yarp"
+  # -- Makes the IngressClass the default for the cluster
   default: false
   annotations: {}
   parameters: {}
