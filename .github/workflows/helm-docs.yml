@@ -11,3 +11,6 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.event.pull_request.head.ref }}
       - uses: losisin/helm-docs-github-action@v1
+        with:
+          git-push: true
+          fail-on-diff: true
