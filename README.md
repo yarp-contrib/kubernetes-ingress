@@ -28,7 +28,7 @@ helm install yarp-ingress yarp-ingress/yarp-ingress
 
 This installs YARP ingress on the cluster in the default configuration.
 
-Check chart's [README](./charts//yarp-ingress/README.md) and [values.yaml](./charts/yarp-ingress/values.yaml) for information on how to install in different modes and cloud providers.
+Check chart's [README](./charts//yarp-ingress/README.md) and its [values](./charts/yarp-ingress/README.md#values) for information on how to install in different modes and cloud providers.
 
 ## Images
 

@@ -17,7 +17,7 @@ helm install yarp-ingress yarp-ingress/yarp-ingress
 
 ## Configuration
 
-To see all configurable options with detailed comments, visit the chart's [values.yaml](./values.yaml), or run these configuration commands:
+To see all configurable options with detailed comments, see [values](#values) section below, or run these configuration commands:
 
 ```console
 helm show values yarp-ingress/yarp-ingress
@@ -171,7 +171,7 @@ controller:
 | monitor.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | monitor.containerSecurityContext.runAsUser | int | `101` |  |
 | monitor.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| monitor.enabled | bool | `false` |  |
+| monitor.enabled | bool | `false` | Enable deployment of the monitor component as a separate service from the controller |
 | monitor.extraEnvVars | list | `[]` |  |
 | monitor.image.pullPolicy | string | `"IfNotPresent"` |  |
 | monitor.image.repository | string | `"ghcr.io/yarp-contrib/kubernetes-ingress/monitor"` |  |
