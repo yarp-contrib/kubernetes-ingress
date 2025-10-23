@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-    - "charts/**"
+    - "charts/yarp-ingress/Chart.yaml"
 
 jobs:
   push-chart:
