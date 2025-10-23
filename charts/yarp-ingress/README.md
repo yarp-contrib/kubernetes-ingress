@@ -1,5 +1,7 @@
 # YARP Kubernetes Ingress Helm chart
 
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: b2d13ea94154936fe9d7235e1189d3266dde2c53](https://img.shields.io/badge/AppVersion-b2d13ea94154936fe9d7235e1189d3266dde2c53-informational?style=flat-square) 
+
 This chart installs YARP as a Kubernetes Ingress resource using [pre-built images](../../README.md#images) based on [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller).
 
 ## Install
