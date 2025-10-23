@@ -191,6 +191,7 @@ rbac:
   create: true
 
 monitor:
+  # -- Enable deployment of the monitor component as a separate service from the controller
   enabled: false
 
   replicaCount: 1
