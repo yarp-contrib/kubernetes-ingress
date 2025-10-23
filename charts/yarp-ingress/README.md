@@ -1,6 +1,6 @@
-# YARP Kubernetes Ingress helm chart
+# YARP Kubernetes Ingress Helm chart
 
-This charts installs YARP, as a Kubernetes Ingress resource, using [pre-built images](../../README.md#images) based on [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller)
+This chart installs YARP as a Kubernetes Ingress resource using [pre-built images](../../README.md#images) based on [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller).
 
 ## Get Helm repository information
 
@@ -11,7 +11,7 @@ helm repo update
 
 ## Install chart
 
-Default (standlone) installation:
+Default (standalone) installation:
 
 ```console
 helm install yarp-ingress yarp-ingress/yarp-ingress
@@ -25,9 +25,9 @@ To see all configurable options with detailed comments, visit the chart's [value
 helm show values yarp-ingress/yarp-ingress
 ```
 
-The chart installs in [standalone mode](../../README.md#modes) by default and is cloud-provider agnostic, meaning you will have to provision yourself the load-balancer in front of the ingress controller service.
+The chart installs in [standalone mode](../../README.md#modes) by default and is cloud-provider agnostic. You must provision the load balancer that fronts the ingress controller service yourself.
 
-Below some possible configuration values, for different scenarios, to help you bootstrap your installation.
+Below are some example configuration snippets for different scenarios to help you bootstrap your installation.
 
 #### Controller + Monitor
 
