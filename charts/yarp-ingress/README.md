@@ -1,6 +1,6 @@
 # YARP Kubernetes Ingress Helm chart
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: b2d13ea94154936fe9d7235e1189d3266dde2c53](https://img.shields.io/badge/AppVersion-b2d13ea94154936fe9d7235e1189d3266dde2c53-informational?style=flat-square) 
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: b2d13ea94154936fe9d7235e1189d3266dde2c53](https://img.shields.io/badge/AppVersion-b2d13ea94154936fe9d7235e1189d3266dde2c53-informational?style=flat-square)
 
 This chart installs YARP as a Kubernetes Ingress resource using [pre-built images](../../README.md#images) based on [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller).
 
@@ -155,9 +155,9 @@ controller:
 | fullnameOverride | string | `""` |  |
 | ingressClass.aliases | list | `[]` | List of additional IngressClass resources to be created as named aliases to the main IngressClass controller defined above |
 | ingressClass.annotations | object | `{}` |  |
-| ingressClass.controllerValue | string | `"microsoft.com/ingress-yarp"` |  |
-| ingressClass.default | bool | `false` |  |
-| ingressClass.name | string | `"yarp"` |  |
+| ingressClass.controllerValue | string | `"microsoft.com/ingress-yarp"` | Controller value of the IngressClass resource to be created for the controller |
+| ingressClass.default | bool | `false` | Makes the IngressClass the default for the cluster |
+| ingressClass.name | string | `"yarp"` | Name of the IngressClass resource to be created for the controller |
 | ingressClass.parameters | object | `{}` |  |
 | monitor.affinity | object | `{}` |  |
 | monitor.autoscaling.enabled | bool | `false` |  |
@@ -211,4 +211,4 @@ controller:
 | monitor.serviceAccount.name | string | `""` |  |
 | monitor.tolerations | list | `[]` |  |
 | nameOverride | string | `""` |  |
-| rbac.create | bool | `true` |  |
+| rbac.create | bool | `true` | Create RBAC resources for the controller |
