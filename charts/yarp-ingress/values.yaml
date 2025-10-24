@@ -191,6 +191,7 @@ ingressClass:
   aliases: []
 
 rbac:
+  # -- Create RBAC resources for the controller
   create: true
 
 monitor:
