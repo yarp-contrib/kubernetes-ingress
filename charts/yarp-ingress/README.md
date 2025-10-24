@@ -211,4 +211,4 @@ controller:
 | monitor.serviceAccount.name | string | `""` |  |
 | monitor.tolerations | list | `[]` |  |
 | nameOverride | string | `""` |  |
-| rbac.create | bool | `true` |  |
+| rbac.create | bool | `true` | Create RBAC resources for the controller |
