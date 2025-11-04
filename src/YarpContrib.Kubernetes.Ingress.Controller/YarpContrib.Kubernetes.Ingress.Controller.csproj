@@ -8,8 +8,8 @@
     <ContainerRepository>yarp-contrib/kubernetes-ingress/controller</ContainerRepository>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-alpine</ContainerBaseImage>
     <ContainerUser>nonroot:nonroot</ContainerUser>
-    <ContainerRuntimeIdentifiers>linux-x64</ContainerRuntimeIdentifiers>
-    <ContainerRuntimeIdentifiers>linux-arm64</ContainerRuntimeIdentifiers>
+    <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
+    <ContainerRuntimeIdentifier>linux-arm64</ContainerRuntimeIdentifier>
     <ContainerImageFormat>OCI</ContainerImageFormat>
     <ContainerDescription>YARP-based Kubernetes Ingress Controller</ContainerDescription>
   </PropertyGroup>
