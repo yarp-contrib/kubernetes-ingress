@@ -3,5 +3,5 @@ name: yarp-ingress
 description: YARP Ingress Controller for Kubernetes
 
 type: application
-version: 0.2.1
-appVersion: "b2d13ea94154936fe9d7235e1189d3266dde2c53"
+version: 0.2.2
+appVersion: "360ee8f3c4e61369f8c4169794c0c6d4fa7c0e2e"
