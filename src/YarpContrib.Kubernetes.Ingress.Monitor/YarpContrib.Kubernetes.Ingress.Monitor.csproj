@@ -4,12 +4,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     
-    <ContainerVersion>0.1.0</ContainerVersion>
+    <ContainerVersion>0.2.0</ContainerVersion>
     <ContainerRepository>yarp-contrib/kubernetes-ingress/monitor</ContainerRepository>
     <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-alpine</ContainerBaseImage>
     <ContainerUser>nonroot:nonroot</ContainerUser>
-    <ContainerRuntimeIdentifier>linux-x64</ContainerRuntimeIdentifier>
-    <ContainerRuntimeIdentifier>linux-arm64</ContainerRuntimeIdentifier>
+    <RuntimeIdentifiers>linux-x64;linux-arm64</RuntimeIdentifiers>
+    <ContainerRuntimeIdentifiers>linux-x64;linux-arm64</ContainerRuntimeIdentifiers>
     <ContainerImageFormat>OCI</ContainerImageFormat>
     <ContainerDescription>Monitor for YARP-based Kubernetes Ingress Controller</ContainerDescription>
   </PropertyGroup>
