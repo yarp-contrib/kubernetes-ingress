@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   yarp-ingress:
   - apiVersion: v2
+    appVersion: 2f5e473bbeb64a06c0dec4e2806b7f80ebb63f99
+    created: "2025-11-04T23:04:02.957587637Z"
+    description: YARP Ingress Controller for Kubernetes
+    digest: 343a6423c309d70e2f2ab72fba4d43e76b16117290d2c7fa453361b3b4959072
+    name: yarp-ingress
+    type: application
+    urls:
+    - https://github.com/yarp-contrib/kubernetes-ingress/releases/download/yarp-ingress-0.2.3/yarp-ingress-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
     appVersion: 360ee8f3c4e61369f8c4169794c0c6d4fa7c0e2e
     created: "2025-11-04T22:21:04.468844416Z"
     description: YARP Ingress Controller for Kubernetes
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/yarp-contrib/kubernetes-ingress/releases/download/yarp-ingress-0.2.0/yarp-ingress-0.2.0.tgz
     version: 0.2.0
-generated: "2025-11-04T22:21:04.468861087Z"
+generated: "2025-11-04T23:04:02.957607063Z"
