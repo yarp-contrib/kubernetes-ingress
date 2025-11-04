@@ -94,7 +94,18 @@ controller:
   service:
     enabled: true
     # -- Annotations to be added to the external controller service.
-    annotations: {}
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-name: "yarp-public-ingress"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-type: "external"
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+      service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: http
+      service.beta.kubernetes.io/aws-load-balancer-healthcheck-port: "10264"
+      service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: "/health/live"
+      service.beta.kubernetes.io/aws-load-balancer-healthcheck-sucess-codes: "200-299"
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:eu-west-1:668418055043:certificate/9ca3ab44-0d99-4bca-81c7-ea8af20410ad"
     # -- Labels to be added to both controller services.
     labels: {}
     # -- Type of the external controller service.
