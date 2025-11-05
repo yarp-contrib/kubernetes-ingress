@@ -6,7 +6,7 @@
     
     <ContainerVersion>0.1.0</ContainerVersion>
     <ContainerRepository>yarp-contrib/kubernetes-ingress/controller</ContainerRepository>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-alpine</ContainerBaseImage>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:10.0-noble</ContainerBaseImage>
     <ContainerUser>nonroot:nonroot</ContainerUser>
     <RuntimeIdentifiers>linux-arm64;linux-x64</RuntimeIdentifiers>
     <ContainerRuntimeIdentifiers>linux-arm64;linux-x64</ContainerRuntimeIdentifiers>
