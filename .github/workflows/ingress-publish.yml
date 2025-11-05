@@ -27,17 +27,17 @@ jobs:
             /t:PublishContainer \
             --configuration Release \
             /p:ContainerRegistry=ghcr.io \
-            /p:ContainerRuntimeIdentifiers=\"linux-x64;linux-arm64\"
         working-directory: ./src/YarpContrib.Kubernetes.Ingress.Controller
         env:
           ContainerImageTags: "${{ github.sha }};latest"
+          ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
 
       - run: |
           dotnet publish \
             /t:PublishContainer \
             --configuration Release \
             /p:ContainerRegistry=ghcr.io \
-            /p:ContainerRuntimeIdentifiers=\"linux-x64;linux-arm64\"
         working-directory: ./src/YarpContrib.Kubernetes.Ingress.Monitor
         env:
           ContainerImageTags: "${{ github.sha }};latest"
+          ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
