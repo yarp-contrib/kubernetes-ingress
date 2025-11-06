@@ -11,7 +11,7 @@ jobs:
       packages: write
     env:
       ContainerImageTags: "${{ github.sha }};latest"
-      ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
+      # ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
       ContainerRegistry: "ghcr.io"
     steps:
       - uses: actions/checkout@v5
