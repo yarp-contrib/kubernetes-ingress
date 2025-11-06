@@ -9,6 +9,10 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      ContainerImageTags: "${{ github.sha }};latest"
+      ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
+      ContainerRegistry: "ghcr.io"
     steps:
       - uses: actions/checkout@v5
 
@@ -22,22 +26,4 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: |
-          dotnet publish \
-            /t:PublishContainer \
-            --configuration Release \
-            /p:ContainerRegistry=ghcr.io \
-        working-directory: ./src/YarpContrib.Kubernetes.Ingress.Controller
-        env:
-          ContainerImageTags: "${{ github.sha }};latest"
-          ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
-
-      - run: |
-          dotnet publish \
-            /t:PublishContainer \
-            --configuration Release \
-            /p:ContainerRegistry=ghcr.io \
-        working-directory: ./src/YarpContrib.Kubernetes.Ingress.Monitor
-        env:
-          ContainerImageTags: "${{ github.sha }};latest"
-          ContainerRuntimeIdentifiers: "linux-x64;linux-arm64"
+      - run: dotnet publish /t:PublishContainer --configuration Release
