@@ -1,6 +1,6 @@
 # YARP Kubernetes Ingress Helm chart
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: b2d13ea94154936fe9d7235e1189d3266dde2c53](https://img.shields.io/badge/AppVersion-b2d13ea94154936fe9d7235e1189d3266dde2c53-informational?style=flat-square)
+![Version: 0.2.5](https://img.shields.io/badge/Version-0.2.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: ea1afc1ce7916f2c6a17070dca85026e24b81654](https://img.shields.io/badge/AppVersion-ea1afc1ce7916f2c6a17070dca85026e24b81654-informational?style=flat-square)
 
 This chart installs YARP as a Kubernetes Ingress resource using [pre-built images](../../README.md#images) based on [Yarp.Kubernetes.Controller](https://github.com/dotnet/yarp/tree/main/src/Kubernetes.Controller).
 
@@ -121,7 +121,7 @@ controller:
 | controller.replicaCount | int | `1` |  |
 | controller.resources.requests.cpu | string | `"100m"` |  |
 | controller.resources.requests.memory | string | `"90Mi"` |  |
-| controller.service.annotations | object | `{}` | Annotations to be added to the external controller service. |
+| controller.service.annotations | object | `{"service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled":"true","service.beta.kubernetes.io/aws-load-balancer-healthcheck-path":"/health/live","service.beta.kubernetes.io/aws-load-balancer-healthcheck-port":"10264","service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol":"http","service.beta.kubernetes.io/aws-load-balancer-healthcheck-sucess-codes":"200-299","service.beta.kubernetes.io/aws-load-balancer-name":"yarp-public-ingress","service.beta.kubernetes.io/aws-load-balancer-nlb-target-type":"ip","service.beta.kubernetes.io/aws-load-balancer-scheme":"internet-facing","service.beta.kubernetes.io/aws-load-balancer-ssl-cert":"arn:aws:acm:eu-west-1:668418055043:certificate/9ca3ab44-0d99-4bca-81c7-ea8af20410ad","service.beta.kubernetes.io/aws-load-balancer-ssl-ports":"https","service.beta.kubernetes.io/aws-load-balancer-type":"external"}` | Annotations to be added to the external controller service. |
 | controller.service.appProtocol | bool | `true` | Declare the app protocol of the external HTTP and HTTPS listeners or not. Supersedes provider-specific annotations for declaring the backend protocol. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol |
 | controller.service.clusterIP | string | `""` | Pre-defined cluster internal IP address of the external controller service. Take care of collisions with existing services. This value is immutable. Set once, it can not be changed without deleting and re-creating the service. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#choosing-your-own-ip-address |
 | controller.service.clusterIPs | list | `[]` | Pre-defined cluster internal IP addresses of the external controller service. Take care of collisions with existing services. This value is immutable. Set once, it can not be changed without deleting and re-creating the service. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#choosing-your-own-ip-address |
